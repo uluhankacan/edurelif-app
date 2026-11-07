@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduRelief - Direct Debt Pay</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="[https://cdn.tailwindcss.com"></script]https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel standalone to load JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel" src="App.jsx"></script>
+    <script type="text/babel">
+      const rootElement = document.getElementById('root');
+      const root = ReactDOM.createRoot(rootElement);
+      // Wait for App to load or use default export
+      window.addEventListener('load', () => {
+        if (typeof EduReliefApp !== 'undefined') {
+          root.render(<EduReliefApp />);
+        }
+      });
+    </script>
+  </body>
+</html>
