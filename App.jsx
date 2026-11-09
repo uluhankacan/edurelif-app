@@ -49,7 +49,7 @@ function EduReliefApp() {
     e.preventDefault();
     if (!selectedStudent) return;
    
-    const stripeUrl = "https://buy.stripe.com/14A5kF53M83P4Xw0dkes";
+    const stripeUrl = "https://buy.stripe.com/14A5kF53M83P4Xw0dkes000";
     window.open(stripeUrl, "_blank");
 
     // ADD THIS LINE BACK IN:
