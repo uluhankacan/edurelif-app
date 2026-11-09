@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+  // Extract React hooks from global window scope
+const { useState } = React;
 
-export default function EduReliefApp() {
+function EduReliefApp() {
   const [activeTab, setActiveTab] = useState("donor"); // 'donor' or 'student'
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [donationAmount, setDonationAmount] = useState(50);
@@ -18,7 +19,7 @@ export default function EduReliefApp() {
       totalDebt: 24500,
       raised: 18200,
       servicer: "Nelnet",
-      story: "Working night shifts at the local clinic while finishing my nursing degree. This debt relief helps me step into my residency without heavy financial distress.",
+      story: "Working night shifts at the local clinic while finishing my nursing degree. This debt relief helps me step into my residency without heavy financial distress."
     },
     {
       id: 2,
@@ -29,7 +30,7 @@ export default function EduReliefApp() {
       totalDebt: 31000,
       raised: 12400,
       servicer: "MOHELA",
-      story: "First-generation college student aiming to build sustainable energy solutions. Every contribution goes straight toward clearing my loan principal.",
+      story: "First-generation college student aiming to build sustainable energy solutions. Every contribution goes straight toward clearing my loan principal."
     }
   ]);
 
@@ -47,7 +48,6 @@ export default function EduReliefApp() {
   const handleDonate = (e) => {
     e.preventDefault();
     if (!selectedStudent) return;
-
     const amountNum = parseFloat(donationAmount);
     const updated = students.map(s => {
       if (s.id === selectedStudent.id) {
@@ -55,7 +55,6 @@ export default function EduReliefApp() {
       }
       return s;
     });
-
     setStudents(updated);
     setSuccessMessage(`Thank you! $${amountNum} was successfully sent directly to ${selectedStudent.servicer} on behalf of ${selectedStudent.name}.`);
     setTimeout(() => {
@@ -118,13 +117,11 @@ export default function EduReliefApp() {
                 100% of your gift goes directly to verified student loan servicers (Nelnet, MOHELA, Aidvantage). No middlemen, zero personal bank transfers.
               </p>
             </div>
-
             {successMessage && (
               <div className="mb-6 p-4 bg-emerald-100 border border-emerald-400 text-emerald-800 rounded-xl text-center font-medium animate-fade-in">
                 🎉 {successMessage}
               </div>
             )}
-
             <div className="grid md:grid-cols-2 gap-6">
               {students.map((student) => {
                 const percent = Math.min(Math.round((student.raised / student.totalDebt) * 100), 100);
@@ -152,7 +149,6 @@ export default function EduReliefApp() {
                         </div>
                       </div>
                     </div>
-
                     <div className="bg-slate-50 px-6 py-4 border-t border-slate-100 flex justify-between items-center">
                       <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
                         🔒 Verified Debt Account
@@ -175,7 +171,6 @@ export default function EduReliefApp() {
               <h2 className="text-2xl font-bold text-slate-900">Student Verification & Campaign Setup</h2>
               <p className="text-sm text-slate-500">Complete the steps below to verify your academic status and link your student loan servicer.</p>
             </div>
-
             {verificationStep === 1 && (
               <form onSubmit={(e) => { e.preventDefault(); setVerificationStep(2); }} className="space-y-4">
                 <div>
@@ -198,7 +193,6 @@ export default function EduReliefApp() {
                 </button>
               </form>
             )}
-
             {verificationStep === 2 && (
               <form onSubmit={handleStudentSubmit} className="space-y-4">
                 <div>
@@ -243,11 +237,9 @@ export default function EduReliefApp() {
               <h3 className="text-xl font-bold text-slate-900">Support {selectedStudent.name}</h3>
               <button onClick={() => setSelectedStudent(null)} className="text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
             </div>
-           
             <p className="text-sm text-slate-600 mb-6">
               Funds are sent directly to <span className="font-semibold text-slate-800">{selectedStudent.servicer}</span> to reduce the principal loan balance.
             </p>
-
             <form onSubmit={handleDonate} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">Contribution Amount ($)</label>
@@ -271,7 +263,6 @@ export default function EduReliefApp() {
                   className="w-full px-4 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                 />
               </div>
-
               <div className="flex items-center space-x-2 py-2">
                 <input
                   type="checkbox"
@@ -282,7 +273,6 @@ export default function EduReliefApp() {
                 />
                 <label htmlFor="fees" className="text-xs text-slate-600">Cover 3% payment processing fee so 100% goes to the loan.</label>
               </div>
-
               <button
                 type="submit"
                 className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md transition"
@@ -296,3 +286,7 @@ export default function EduReliefApp() {
     </div>
   );
 }
+
+// Mount directly to DOM root
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<EduReliefApp />);
