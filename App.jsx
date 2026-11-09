@@ -49,6 +49,7 @@ function EduReliefApp() {
     e.preventDefault();
     if (!selectedStudent) return;
     const stripeUrl = "https://buy.stripe.com/14A5kF53M83P4Xw0dkes000
+      cost amountNum = parseFloat(donationAmount);
       window.open(stripeUrl, "_blank");
     const updated = students.map(s => {
       if (s.id === selectedStudent.id) {
